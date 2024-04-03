@@ -1,5 +1,5 @@
-import { Router } from "express";
-import produtoController from '../atividade/src/estoque/produtos/produtos.controller'
+import { Router } from 'express';
+import produtoController from '../estrutura2Atividade/src/estoque/produtos/produtos.controller'
 
 const routes = Router();
 
