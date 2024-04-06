@@ -1,16 +1,15 @@
 {
   "name": "estrutura2atividade",
   "version": "1.0.0",
-  "description": "<<<<<<< HEAD\r 1. Desenvolva um sistema de gerenciamento de estoque para uma loja de\r conveniência. O sistema deve permitir que o usuário adicione novos produtos ao\r estoque e remova-os quando necessário. Além disso, o sistema deve ser capaz de\r recuperar informações sobre um produto específico rapidamente.\r Implemente uma pilha para rastrear as adições e remoções mais recentes de\r produtos, e uma tabela hash para armazenar informações detalhadas sobre cada\r produto, como nome, preço e quantidade em estoque. Como parte da solução,\r utilize o método de multiplicação para implementar a tabela hash e resolva colisões\r com listas encadeadas em um vetor.",
-  "main": "index.js",
+  "description": "1. Desenvolva um sistema de gerenciamento de estoque para uma loja de\r conveniência. O sistema deve permitir que o usuário adicione novos produtos ao\r estoque e remova-os quando necessário. Além disso, o sistema deve ser capaz de\r recuperar informações sobre um produto específico rapidamente.\r Implemente uma pilha para rastrear as adições e remoções mais recentes de\r produtos, e uma tabela hash para armazenar informações detalhadas sobre cada\r produto, como nome, preço e quantidade em estoque. Como parte da solução,\r utilize o método de multiplicação para implementar a tabela hash e resolva colisões\r com listas encadeadas em um vetor.",
+  "main": "main.js",
   "scripts": {
-    "start": "ts-node main.ts"
+    "start": "node main.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.4"
+  "devDependencies": {
+    "inquirer": "^9.2.17"
   }
 }
