@@ -27,9 +27,5 @@ Considere que cada palavra-chave pode conter apenas letras minúsculas e que o
 arquivo de entrada contém uma palavra-chave por linha. As palavras-chave são
 lidas de um arquivo de entrada chamado "palavras_chave.txt" e armazenadas em
 uma árvore binária de busca. O programa permite ao usuário buscar uma palavra
-específica no dicionário. A comparação de palavras é feita de forma
-<<<<<<< HEAD
-case-insensitive, ou seja, não faz diferença entre maiúsculas e minúsculas.
-=======
-case-insensitive, ou seja, não faz diferença entre maiúsculas e minúsculas.
->>>>>>> c38e83e1461837131ce926ced0ce176423b8decf
+específica no dicionário. A comparação de palavras é feita de forma case-insensitive, 
+ou seja, não faz diferença entre maiúsculas e minúsculas.
