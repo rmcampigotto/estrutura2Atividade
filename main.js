@@ -6,28 +6,21 @@ class HashTable {
         this.size = size;
     }
 
-    // Basic hash function (improve for better distribution)
+    // Função para gerar o index hash
     _hash(key) {
         let hash = 0;
-        if (typeof key == 'string') {
-            for (let i = 0; i < key.length; i++) {
-                hash += key.charCodeAt(i) * i;
-            }
-        }
-
         return hash % this.size;
     }
 
-    // Set key-value pair
+    // Criar lista para index duplicado
     set(key, value) {
         const index = this._hash(key);
         if (!this.table[index]) {
-            this.table[index] = new LinkedList(); // Create a linked list for collisions
+            this.table[index] = new LinkedList(); // Lista para colisões
         }
         this.table[index].append({ key, value });
     }
 
-    // Get value by key
     get(key) {
         const index = this._hash(key);
         if (!this.table[index]) return null;
@@ -41,7 +34,6 @@ class HashTable {
         return null;
     }
 
-    // Remove key-value pair (optional)
     remove(key) {
         const index = this._hash(key);
         if (!this.table[index]) return null;
@@ -50,7 +42,6 @@ class HashTable {
     }
 }
 
-// Simple linked list class for separate chaining
 class LinkedList {
     constructor() {
         this.head = null;
@@ -90,25 +81,81 @@ class LinkedList {
 }
 
 const myHash = new HashTable(3);
-let key, value;
+let key, value, opcao;
 
-// INPUT DE VALORES
-await inquirer.prompt([
-    {
-        type: 'string | number',
-        name: 'key',
-        message: 'KEY: '
-    },
-    {
-        type: 'any',
-        name: 'value',
-        message: 'VALUE: '
+/*==========================================================================*/
+const cabecalho = async function () {
+    await inquirer.prompt([
+        {
+            type: 'number',
+            name: 'opcao',
+            message: '\n1-INSERIR\n2-BUSCAR\n3-REMOVER\nESCOLHA: '
+        }
+    ]).then((answers) => {
+        opcao = answers.opcao;
+        opcao = parseInt(opcao);
+    })
+}
+
+const inserir = async function () {
+    await inquirer.prompt([
+        {
+            type: 'number',
+            name: 'key',
+            message: '\nKEY: '
+        },
+        {
+            type: 'any',
+            name: 'value',
+            message: '\nVALUE: '
+        }
+    ]).then((answers) => {
+        key = answers.key;
+        value = answers.value;
+    });
+}
+
+const buscar = async function () {
+    await inquirer.prompt([
+        {
+            type: 'number',
+            name: 'key',
+            message: '\nKEY: '
+        }
+    ]).then((answers) => {
+        key = answers.key;
+    });
+}
+
+const remover = async function () {
+    await inquirer.prompt([
+        {
+            type: 'number',
+            name: 'key',
+            message: '\nKEY: '
+        }
+    ]).then((answers) => {
+        key = answers.key;
+    });
+}
+/*==========================================================================*/
+
+
+do {
+    await cabecalho();
+    switch (opcao) {
+        case 1:
+            await inserir();
+            myHash.set(key, value);
+            break;
+        case 2:
+            await buscar();
+            console.log(`\n\t Valor do index [${key}]: ${myHash.get(key)}`);
+        case 3:
+            await remover();
+            myHash.remove(key);
+        default:
+            break;
     }
-]).then((answers) => {
-    key = answers.key;
-    value = answers.value;
-});
 
-
-myHash.set(key, value)
-console.log(myHash.get(key));
+} while (opcao > 0)
