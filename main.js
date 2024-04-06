@@ -3,22 +3,31 @@ import inquirer from 'inquirer';
 class HashTable {
     constructor(size) {
         this.table = new Array(size);
+        this.pilha = new Array(50);
         this.size = size;
     }
 
     // Função para gerar o index hash
     _hash(key) {
         let hash = 0;
-        return hash % this.size;
+        return hash * this.size;
     }
 
-    // Criar lista para index duplicado
     set(key, value) {
+        let today = new Date();
+        let hr = String(today.getHours()).padStart(2, '0');
+        let MM = String(today.getMinutes()).padStart(2, '0');
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
+        let yyyy = today.getFullYear();
+        today = `${dd}/${mm}/${yyyy} ${hr}:${MM}`;
+
         const index = this._hash(key);
         if (!this.table[index]) {
             this.table[index] = new LinkedList(); // Lista para colisões
         }
         this.table[index].append({ key, value });
+        this.pilha.push({ "operação": "INSERIR", "date": today });
     }
 
     get(key) {
@@ -35,10 +44,18 @@ class HashTable {
     }
 
     remove(key) {
+        let today = new Date();
+        let hr = String(today.getHours()).padStart(2, '0');
+        let MM = String(today.getMinutes()).padStart(2, '0');
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
+        let yyyy = today.getFullYear();
+        today = `${dd}/${mm}/${yyyy} ${hr}:${MM}`;
+
         const index = this._hash(key);
         if (!this.table[index]) return null;
         const removed = this.table[index].remove({ key });
-        return removed ? removed.value : null;
+        return removed ? removed.value & this.pilha.push({ "operação": "REMOVER", "date": today }) : null;
     }
 }
 
@@ -89,7 +106,7 @@ const cabecalho = async function () {
         {
             type: 'number',
             name: 'opcao',
-            message: '\n1-INSERIR\n2-BUSCAR\n3-REMOVER\nESCOLHA: '
+            message: '\n1-INSERIR\n2-BUSCAR\n3-REMOVER\n4-PILHA LOG\n\nESCOLHA: '
         }
     ]).then((answers) => {
         opcao = answers.opcao;
@@ -154,6 +171,13 @@ do {
         case 3:
             await remover();
             myHash.remove(key);
+        case 4:
+            console.log()
+            myHash.pilha.forEach(item => {
+                console.log(`\tOPERAÇÃO: ${item.operação} - DATA: ${item.date}`)
+            })
+            console.log()
+            break;
         default:
             break;
     }
