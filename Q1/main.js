@@ -168,9 +168,11 @@ do {
         case 2:
             await buscar();
             console.log(`\n\t Valor do index [${key}]: ${myHash.get(key)}`);
+            break;
         case 3:
             await remover();
             myHash.remove(key);
+            break;
         case 4:
             console.log()
             myHash.pilha.forEach(item => {
@@ -182,4 +184,4 @@ do {
             break;
     }
 
-} while (opcao > 0)
+} while (opcao > 0);
