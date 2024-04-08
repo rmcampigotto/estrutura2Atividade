@@ -6,7 +6,7 @@ const cabecalho = async function () {
         {
             type: 'number',
             name: 'opcao',
-            message: '\n1-INSERIR\n2-BUSCAR\n3-REMOVER\n\nESCOLHA: '
+            message: '\n1-INSERIR\n2-BUSCAR\n3-REMOVER\n0-SAIR\n\nESCOLHA: '
         }
     ]).then((answers) => {
         opcao = answers.opcao;
@@ -105,6 +105,27 @@ class ListaEncadeada {
         }
         return null;
     }
+
+    ordenarPorNome(lista) {
+        let current = lista.head;
+        while (current) {
+            let menor = current;
+            let next = current.next;
+            while (next) {
+                if (next.contato.nome < menor.contato.nome) {
+                    menor = next;
+                }
+                next = next.next;
+            }
+            if (menor !== current) {
+                let temp = menor.contato;
+                menor.contato = current.contato;
+                current.contato = temp;
+            }
+            current = current.next;
+        }
+    }
+
 }
 
 class Contato {
@@ -129,38 +150,53 @@ class Contato {
     }
 
     inserirLista(nome, telefone) {
-        this.listaEncadeada.inserir({ nome, telefone });
+        this.listaEncadeada.inserir({ nome, telefone })
+    }
+
+    ordenarLista() {
+        this.listaEncadeada.ordenarPorNome(this.listaEncadeada)
+    }
+
+    imprimirLista(lista) {
+        let current = lista.head
+        while (current) {
+            console.log("\t", current.contato)
+            current = current.next
+        }
     }
 
     removerLista(nome, telefone) {
-        this.listaEncadeada.remover({ nome, telefone });
+        this.listaEncadeada.remover({ nome, telefone })
     }
 
 }
 
-let contato = new Contato();
-let nome, telefone, opcao;
+let contato = new Contato()
+let nome, telefone, opcao
 
 do {
-    await cabecalho();
+    await cabecalho()
     switch (opcao) {
         case 1:
             await inserir();
-            contato.inserirLista(nome, telefone);
-            contato.inserirVetor(nome, telefone);
-            break;
+            contato.inserirLista(nome, telefone)
+            contato.ordenarLista()
+            contato.inserirVetor(nome, telefone)
+            break
         case 2:
-            await buscar();
+            await buscar()
             console.log('\nVetor:')
-            contato.buscarVetor(nome);
-            break;
+            contato.buscarVetor(nome)
+            console.log("\nLista:")
+            console.log(contato.imprimirLista(contato.listaEncadeada))
+            break
         case 3:
-            await remover();
-            contato.removerLista(nome, telefone);
-            contato.removerVetor(nome, telefone);
-            break;
+            await remover()
+            contato.removerLista(nome, telefone)
+            contato.removerVetor(nome, telefone)
+            break
         default:
-            break;
+            break
     }
 
-} while (opcao > 0);
+} while (opcao > 0)
