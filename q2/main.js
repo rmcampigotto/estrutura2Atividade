@@ -63,6 +63,21 @@ const remover = async function () {
 }
 /*==========================================================================*/
 
+class Contato {
+    vetor = new Array(21)
+    listaEncadeada = new ListaEncadeada()
+    arvore = new Arvore()
+
+    inserirVetor(contato) {
+        this.vetor.push(contato)
+    }
+
+    removerVetor(contato) {
+        let index = this.vetor.indexOf(contato)
+        this.vetor.splice(index, 1)
+    }
+}
+
 class ListaEncadeada {
     constructor() {
         this.head = null;
@@ -119,91 +134,40 @@ class ListaEncadeada {
             current = current.next;
         }
     }
-
 }
 
-class Contato {
-    vetor = new Array(21)
-    listaEncadeada = new ListaEncadeada()
-    arvore = new Arvore()
-
-
-    inserirVetor(nome, telefone) {
-        this.vetor.push({ nome, telefone });
-    }
-
-    removerVetor(nome, telefone) {
-        let index = this.vetor.indexOf({ nome, telefone });
-        this.vetor.splice(index, 1);
-    }
-
-    buscarVetor(nome) {
-        this.vetor.forEach(item => {
-            if (item.nome == nome) {
-                console.log(`\tNome: ${item.nome} - Telefone: ${item.telefone} ;`)
-            }
-        });
-    }
-
-    inserirLista(nome, telefone) {
-        this.listaEncadeada.inserir({ nome, telefone })
-    }
-
-    ordenarLista() {
-        this.listaEncadeada.ordenarPorNome(this.listaEncadeada)
-    }
-
-    imprimirLista(lista, nome) {
-        let prox = null
-        let current = lista.head
-        while (current) {
-            if(current.contato.nome == nome){
-                if (current.next != null)
-                    prox = current.next.contato.nome 
-                console.log(`\tNome: ${current.contato.nome} - Telefone: ${current.contato.telefone} - Next: ${prox};`)
-            }
-            current = current.next
-        }
-    }
-
-    removerLista(nome, telefone) {
-        this.listaEncadeada.remover({ nome, telefone })
-    }
-
-}
-
-class No{
-    constructor(contato){
-         this.contato = contato
-         this.left = null
-         this.right = null
+class No {
+    constructor(contato) {
+        this.contato = contato
+        this.left = null
+        this.right = null
     }
 }
 
-class Arvore{
-    constructor(){
+class Arvore {
+    constructor() {
         this.raiz = null
     }
 
-    inserir(contato){
+    inserir(contato) {
         const novoNo = new No(contato)
 
-        if(this.raiz === null){
+        if (this.raiz === null) {
             this.raiz = novoNo
-        }else{
+        } else {
             this.inserirNo(this.raiz, novoNo)
         }
     }
 
-    inserirNo(no, novoNo){
-        if(novoNo.contato.nome < no.contato.nome){
-            if(no.left === null){
+    inserirNo(no, novoNo) {
+        if (novoNo.contato.nome < no.contato.nome) {
+            if (no.left === null) {
                 no.left = novoNo
             } else {
                 this.inserirNo(no.left, novoNo)
             }
-        }else{
-            if(no.right === null){
+        } else {
+            if (no.right === null) {
                 no.right = novoNo
             } else {
                 this.inserirNo(no.right, novoNo)
@@ -211,22 +175,21 @@ class Arvore{
         }
     }
 
-    buscar(nome){
+    buscar(nome) {
         return this.buscarNo(this.raiz, nome)
     }
 
     buscarNo(no, nome) {
-        if(no === null){
+        if (no === null) {
             return false
-        } else if (nome < no.contato.nome){
+        } else if (nome < no.contato.nome) {
             return this.buscarNo(no.left, nome)
-        } else if (nome > no.contato.nome){
+        } else if (nome > no.contato.nome) {
             return this.buscarNo(no.right, nome)
         } else {
             return `\tNome: ${no.contato.nome} - Telefone: ${no.contato.telefone} ;`
         }
     }
-
 }
 
 let contato = new Contato()
@@ -236,11 +199,8 @@ do {
     await cabecalho()
     switch (opcao) {
         case 1:
-            await inserir();
-            /*contato.inserirLista(nome, telefone)
-            contato.ordenarLista()*/
-            contato.inserirVetor(nome, telefone)
-            /*contato.arvore.inserir({nome, telefone})*/
+            await inserir()
+            contato.inserirVetor({ nome, telefone })
             break
         case 2:
             contato.vetor.forEach((item) => {
@@ -252,19 +212,19 @@ do {
             break
         case 3:
             await remover()
-            contato.removerLista(nome, telefone)
-            contato.removerVetor(nome, telefone)
+            contato.listaEncadeada.remover(nome, telefone)
+            contato.removerVetor({ nome, telefone })
             break
         case 4:
             contato.vetor.forEach((item) => {
-                contato.inserirLista(item)
+                contato.listaEncadeada.inserir(item)
             })
-            contato.ordenarLista()
+            contato.listaEncadeada.ordenarPorNome(contato.listaEncadeada)
+            console.log("\nLista Ordenada!")
             break
         default:
             if (opcao != 0)
                 console.log("Opção Inválida!")
             break
     }
-
 } while (opcao > 0)
