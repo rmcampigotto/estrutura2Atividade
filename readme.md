@@ -1,3 +1,4 @@
+*FEITO*
 1. Desenvolva um sistema de gerenciamento de estoque para uma loja de
 conveniência. O sistema deve permitir que o usuário adicione novos produtos ao
 estoque e remova-os quando necessário. Além disso, o sistema deve ser capaz de
@@ -8,6 +9,7 @@ produto, como nome, preço e quantidade em estoque. Como parte da solução,
 utilize o método de multiplicação para implementar a tabela hash e resolva colisões
 com listas encadeadas em um vetor.
 
+*FEITO*
 2. Considere que você precisa armazenar os contatos de uma lista telefônica, onde
 cada contato é composto por um nome (string) e um número de telefone (string). O
 programa deve ser capaz de adicionar novos contatos, remover contatos existentes
