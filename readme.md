@@ -18,7 +18,7 @@ b. Lista encadeada: armazena os contatos em uma lista ordenada por nome.
 c. Árvore binária de busca: armazena os contatos em uma estrutura de dados
 mais eficiente para busca.
 
-3. Crie uma solução para um problema de análise sintática utilizado em compiladores
+*FEITO* 3. Crie uma solução para um problema de análise sintática utilizado em compiladores
 para a formação de um dicionário de palavras-chave. O objetivo é ler uma lista de
 palavras-chave de um arquivo de entrada e armazená-las em um dicionário
 implementado como uma árvore binária de busca. Em seguida, o programa deve
