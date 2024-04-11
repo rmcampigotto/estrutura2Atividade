@@ -1,5 +1,4 @@
-*FEITO*
-1. Desenvolva um sistema de gerenciamento de estoque para uma loja de
+*FEITO* 1. Desenvolva um sistema de gerenciamento de estoque para uma loja de
 conveniência. O sistema deve permitir que o usuário adicione novos produtos ao
 estoque e remova-os quando necessário. Além disso, o sistema deve ser capaz de
 recuperar informações sobre um produto específico rapidamente.
@@ -9,8 +8,7 @@ produto, como nome, preço e quantidade em estoque. Como parte da solução,
 utilize o método de multiplicação para implementar a tabela hash e resolva colisões
 com listas encadeadas em um vetor.
 
-*FEITO*
-2. Considere que você precisa armazenar os contatos de uma lista telefônica, onde
+*FEITO* 2. Considere que você precisa armazenar os contatos de uma lista telefônica, onde
 cada contato é composto por um nome (string) e um número de telefone (string). O
 programa deve ser capaz de adicionar novos contatos, remover contatos existentes
 e buscar por um contato específico.
@@ -20,7 +18,7 @@ b. Lista encadeada: armazena os contatos em uma lista ordenada por nome.
 c. Árvore binária de busca: armazena os contatos em uma estrutura de dados
 mais eficiente para busca.
 
-3. Crie uma solução para um problema de análise sintática utilizado em compiladores
+*FEITO* 3. Crie uma solução para um problema de análise sintática utilizado em compiladores
 para a formação de um dicionário de palavras-chave. O objetivo é ler uma lista de
 palavras-chave de um arquivo de entrada e armazená-las em um dicionário
 implementado como uma árvore binária de busca. Em seguida, o programa deve
