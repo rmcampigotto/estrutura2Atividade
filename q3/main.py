@@ -51,9 +51,6 @@ arvore = Arvore()
 for palavra in conteudo.splitlines(keepends=False):
     arvore.inserir(palavra)
 
-print(arvore)
-
-
 opcao = int(input("\n1-PROCURAR\n2-SAIR\nESCOLHA: "))
 
 while opcao == 1:
